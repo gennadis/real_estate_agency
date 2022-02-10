@@ -5,4 +5,4 @@ from .models import Flat
 
 @admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ("town", "address")
