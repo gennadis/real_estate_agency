@@ -13,10 +13,12 @@ class Flat(models.Model):
     owner_pure_phone = PhoneNumberField(
         verbose_name="Номализованный номер владельца",
         blank=True,
+        db_index=True,
     )
     owners_phonenumber = models.CharField(
         verbose_name="Номер владельца",
         max_length=20,
+        db_index=True,
     )
     created_at = models.DateTimeField(
         verbose_name="Когда создано объявление",

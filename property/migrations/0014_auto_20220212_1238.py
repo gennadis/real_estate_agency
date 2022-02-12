@@ -18,7 +18,7 @@ def populate_owners_from_flats(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("property", "0014_owner"),
+        ("property", "0013_owner"),
     ]
 
     operations = [
