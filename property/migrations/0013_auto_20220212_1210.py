@@ -15,7 +15,8 @@ def normalize_phone_number(apps, schema_editor):
         parsed_phone = phonenumbers.parse(flat.owners_phonenumber, "RU")
 
         if phonenumbers.is_valid_number(parsed_phone):
-            flat.owner_pure_phone.set(parsed_phone)
+            flat.owner_pure_phone = parsed_phone
+            flat.save()
 
 
 class Migration(migrations.Migration):
