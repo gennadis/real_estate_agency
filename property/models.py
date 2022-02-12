@@ -5,43 +5,79 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    owner = models.CharField("ФИО владельца", max_length=200, db_index=True)
-    owner_pure_phone = PhoneNumberField("Номализованный номер владельца", blank=True)
-    owners_phonenumber = models.CharField("Номер владельца", max_length=20)
-    created_at = models.DateTimeField(
-        "Когда создано объявление", default=timezone.now, db_index=True
+    owner = models.CharField(
+        verbose_name="ФИО владельца",
+        max_length=200,
+        db_index=True,
     )
-
-    is_new_building = models.NullBooleanField("Новосторойка", db_index=True)
-
-    description = models.TextField("Текст объявления", blank=True)
-    price = models.IntegerField("Цена квартиры", db_index=True)
-
+    owner_pure_phone = PhoneNumberField(
+        verbose_name="Номализованный номер владельца",
+        blank=True,
+    )
+    owners_phonenumber = models.CharField(
+        verbose_name="Номер владельца",
+        max_length=20,
+    )
+    created_at = models.DateTimeField(
+        verbose_name="Когда создано объявление",
+        default=timezone.now,
+        db_index=True,
+    )
+    is_new_building = models.NullBooleanField(
+        verbose_name="Новосторойка",
+        db_index=True,
+    )
+    description = models.TextField(
+        verbose_name="Текст объявления",
+        blank=True,
+    )
+    price = models.IntegerField(
+        verbose_name="Цена квартиры",
+        db_index=True,
+    )
     town = models.CharField(
-        "Город, где находится квартира", max_length=50, db_index=True
+        verbose_name="Город, где находится квартира",
+        max_length=50,
+        db_index=True,
     )
     town_district = models.CharField(
-        "Район города, где находится квартира",
+        verbose_name="Район города, где находится квартира",
         max_length=50,
         blank=True,
         help_text="Чертаново Южное",
     )
     address = models.TextField(
-        "Адрес квартиры", help_text="ул. Подольских курсантов д.5 кв.4"
+        verbose_name="Адрес квартиры",
+        help_text="ул. Подольских курсантов д.5 кв.4",
     )
     floor = models.CharField(
-        "Этаж", max_length=3, help_text="Первый этаж, последний этаж, пятый этаж"
+        verbose_name="Этаж",
+        max_length=3,
+        help_text="Первый этаж, последний этаж, пятый этаж",
     )
-
-    rooms_number = models.IntegerField("Количество комнат в квартире", db_index=True)
+    rooms_number = models.IntegerField(
+        verbose_name="Количество комнат в квартире",
+        db_index=True,
+    )
     living_area = models.IntegerField(
-        "количество жилых кв.метров", null=True, blank=True, db_index=True
+        verbose_name="количество жилых кв.метров",
+        null=True,
+        blank=True,
+        db_index=True,
     )
-
-    has_balcony = models.NullBooleanField("Наличие балкона", db_index=True)
-    active = models.BooleanField("Активно-ли объявление", db_index=True)
+    has_balcony = models.NullBooleanField(
+        verbose_name="Наличие балкона",
+        db_index=True,
+    )
+    active = models.BooleanField(
+        verbose_name="Активно ли объявление",
+        db_index=True,
+    )
     construction_year = models.IntegerField(
-        "Год постройки здания", null=True, blank=True, db_index=True
+        verbose_name="Год постройки здания",
+        null=True,
+        blank=True,
+        db_index=True,
     )
     liked_by = models.ManyToManyField(
         User,
@@ -56,22 +92,39 @@ class Flat(models.Model):
 
 class Claim(models.Model):
     author = models.ForeignKey(
-        User, verbose_name="Кто жаловался", on_delete=models.CASCADE
+        User,
+        verbose_name="Кто жаловался",
+        on_delete=models.CASCADE,
     )
     flat = models.ForeignKey(
-        Flat, verbose_name="Квартира, на которую жаловались", on_delete=models.CASCADE
+        Flat,
+        verbose_name="Квартира, на которую жаловались",
+        on_delete=models.CASCADE,
     )
-    claim_text = models.TextField("Текст жалобы")
+    claim_text = models.TextField(
+        verbose_name="Текст жалобы",
+    )
 
     def __str__(self):
         return f"Жалоба на квартиру по адресу {self.flat}"
 
 
 class Owner(models.Model):
-    fullname = models.CharField("ФИО владельца", max_length=200, db_index=True)
-    phonenumber = models.CharField("Номер владельца", max_length=20, db_index=True)
+    fullname = models.CharField(
+        verbose_name="ФИО владельца",
+        max_length=200,
+        db_index=True,
+    )
+    phonenumber = models.CharField(
+        verbose_name="Номер владельца",
+        max_length=20,
+        db_index=True,
+    )
     pure_phone = PhoneNumberField(
-        "Номализованный номер владельца", blank=True, null=True, db_index=True
+        verbose_name="Номализованный номер владельца",
+        blank=True,
+        null=True,
+        db_index=True,
     )
     flats_owned = models.ManyToManyField(
         Flat,
