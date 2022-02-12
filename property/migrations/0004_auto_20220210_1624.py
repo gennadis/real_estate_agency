@@ -13,7 +13,7 @@ def populate_new_building_field(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("property", "0004_auto_20220210_1351"),
+        ("property", "0003_flat_new_building"),
     ]
 
     operations = [

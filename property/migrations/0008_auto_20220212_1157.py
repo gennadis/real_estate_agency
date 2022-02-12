@@ -16,7 +16,7 @@ def normalize_phone_number(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("property", "0011_auto_20220212_1132"),
+        ("property", "0007_flat_owner_pure_phone"),
     ]
 
     operations = [

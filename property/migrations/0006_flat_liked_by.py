@@ -8,13 +8,18 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('property', '0006_claim'),
+        ("property", "0005_claim"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='flat',
-            name='liked_by',
-            field=models.ManyToManyField(related_name='liked_posts', to=settings.AUTH_USER_MODEL),
+            model_name="flat",
+            name="liked_by",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="liked_posts",
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Кто лайкнул",
+            ),
         ),
     ]
