@@ -63,6 +63,9 @@ class Claim(models.Model):
     )
     claim_text = models.TextField("Текст жалобы")
 
+    def __str__(self):
+        return f"Жалоба на квартиру по адресу {self.flat}"
+
 
 class Owner(models.Model):
     fullname = models.CharField("ФИО владельца", max_length=200)
